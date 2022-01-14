@@ -38,7 +38,7 @@ for code in z[0].find_all('code', attrs={'class':'hljs'}):
 
 # dat = soup.find_all("code", class_="hljs")
 
-# TODO: Terget Cepet GOBLOK🤔
+# TODO: Terget Cepet GOBLOK🤔🤔🤔🤔🤔🤔🤔🤔🤔
 # <code>struct Pokemon: Codable, Identifiable { 
 #     var id = UUID()
 #     var name: String
