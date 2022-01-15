@@ -4,37 +4,52 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 import json
 
-# w = input("what want to find >>> ")
 
-# if len(w) == "7": 
-#     print("error") 
+try: 
+    w = input(">>> ")
+    r = requests.get(f'https://api.stackexchange.com/2.3/search?order=desc&sort=activity&intitle={w}&site=stackoverflow')
+    # response = json.loads(r.text)
 
-w = input(">>> ")
-r = requests.get(f'https://api.stackexchange.com/2.3/search?order=desc&sort=activity&intitle={w}&site=stackoverflow')
-# response = json.loads(r.text)
+    ru = int(input("Num num >> "))
+    res = r.json().get('items')[ru]#.get("title")
 
-# ru = int(input("Num num >> "))
-res = r.json().get('items')[1] 
+    title = res.get('title')
+    link = res.get('link')
 
-#[ru]#.get("title")
+    console = Console()
+    # console.print(res, style="yellow")
+    console.print(f'title = `{title}`', style="yellow")
+    console.print(f'link = {link}', style="green")
 
-title = res.get('title')
-link = res.get('link')
+    x = requests.get(str(link)).text #semisal revisi dari sini🤔🤔
+    soup = BeautifulSoup(x, 'html.parser')
 
-console = Console()
-# console.print(res, style="yellow")
-console.print(f'title = `{title}`', style="yellow")
-console.print(f'link = {link}', style="green")
+    y = soup.select('#answers') #jawaban hungkul🤔
 
-x = requests.get(str(link)).text
-soup = BeautifulSoup(x, 'html.parser')
+    z = y[0].select('pre')
 
-y = soup.select('#answers') #code find,select,select_one
+    # cod = z[0].select('.s-code-block') How to fetch created and updated status of JIRA ticket with Python API
+    # How to fetch data from google book api using python 🤔🤔🤔🤔
 
-z = y[0].select('code')
+    # with open('json_data.json', 'w') as outfile:
+    #     outfile.write(json_string)
 
-for code in z[0].find_all('code', attrs={'class':'hljs'}):
-    cod = code.find('code')
+    pprint(z)
+
+    # with open('data.html', 'w') as result:
+    #     result.write(z)
+
+except:
+    print("\n>> Not Found🤔🤔🤔🤔 <<")
+
+    # except error:
+    #     print("Not Found")
+
+
+
+# for code in z[0].find_all('pre', attrs={'class':'s-code-block'}):
+#     cod = code.find('hljs')
+
 
 # dat = soup.find_all("code", class_="hljs")
 
@@ -67,7 +82,7 @@ for code in z[0].find_all('code', attrs={'class':'hljs'}):
 #     dat = str(code.find(''))
 
 
-pprint(cod)
+
 
 # title = res.get('title')
 # link = res.get('link')
